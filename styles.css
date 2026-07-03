@@ -525,6 +525,126 @@ body {
   color: var(--danger);
 }
 
+/* -- Page intro (used by secondary pages like products.html) ------------ */
+.page-intro {
+  padding-block: 64px 16px;
+}
+
+.page-intro .section-lead {
+  margin-bottom: 0;
+}
+
+/* -- Product filter bar ---------------------------------------------------
+   A row of toggle buttons used on products.html to filter the product
+   grid by category with JavaScript. [aria-pressed] communicates the
+   active button to screen readers the same way a visual "selected"
+   state communicates it to sighted users — see products.js. */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--paper-raised);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--blueprint);
+  color: var(--blueprint);
+}
+
+.filter-btn[aria-pressed="true"] {
+  background: var(--blueprint);
+  border-color: var(--blueprint);
+  color: #fff;
+}
+
+/* -- Product cards --------------------------------------------------------
+   Similar shell to .card, extended with a category tag and a price row.
+   Kept as a separate class rather than piling modifiers onto .card so
+   each stays easy to read on its own. */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.product-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* Transition + initial state used by products.js to fade/collapse
+     cards out when a filter hides them, instead of just snapping. */
+  transition: opacity 0.15s ease;
+}
+
+/* products.js toggles this attribute on cards that don't match the
+   active filter. hidden removes them from layout and the accessibility
+   tree entirely — a stronger signal than opacity alone. */
+.product-card[hidden] {
+  display: none;
+}
+
+.product-tag {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--blueprint);
+  background: var(--blueprint-tint);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+}
+
+.product-card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.product-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.product-price span {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* Shown by products.js when a filter matches zero products — an empty
+   state, not a bug, so it gets its own calm message rather than a
+   blank grid. */
+.empty-state {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  padding: 24px 0;
+}
+
 /* -- Footer -------------------------------------------------------------- */
 .site-footer {
   border-top: 1px solid var(--line);
@@ -599,7 +719,8 @@ body {
     padding: 14px 24px;
   }
 
-  .card-grid {
+  .card-grid,
+  .product-grid {
     grid-template-columns: 1fr;
   }
 

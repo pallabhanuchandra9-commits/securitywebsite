@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  WEB ANATOMY — product.html
+  ===========================================================================
+  Second page of the site. Structurally this is index.html's sibling:
+  same <header>/<nav>/<footer> skeleton, same styles.css, same shared
+  script.js for nav-toggle + footer-year behavior — only <main> changes.
+
+  Reusing the shell like this is the normal pattern for a multi-page
+  site: one stylesheet, one "site chrome" markup pattern, and each page
+  swaps out just its <main> content.
+
+  NEW HERE vs index.html:
+    - The "Products" nav link now carries aria-current="page" instead
+      of "Home", since this is the page the visitor is currently on.
+    - A filter bar + product grid, driven by a second script file,
+      product.js, which is loaded IN ADDITION to script.js below.
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Products — Northlane Studio</title>
+  <meta name="description" content="Boilerplates, toolkits, and design systems built by Northlane Studio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Same stylesheet as index.html — this is what keeps every page
+       visually consistent without copy-pasting CSS. -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Identical header markup to index.html. On a real multi-page
+       project you'd eventually pull this into a template/include so
+       you only maintain it once — for now, while there's no build
+       step, keeping it copy-pasted-but-identical across pages is the
+       simplest approach. -->
+  <header class="site-header" data-tag="&lt;header&gt;">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Northlane Studio home">
+        Northlane<span class="logo-dot">.</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span class="sr-only">Toggle navigation menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/">Home</a></li>
+          <!-- aria-current="page" moved here from "Home" — it tells
+               assistive tech (and, via the CSS rule that targets this
+               attribute, sighted users) which nav item matches the
+               page currently loaded. -->
+          <li><a href="/products" aria-current="page">Products</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- PAGE INTRO --------------------------------------------------------
+         A shorter, quieter version of the homepage hero — this page
+         doesn't need to re-pitch the whole studio, just orient the
+         visitor to what "Products" means here. -->
+    <section class="page-intro" data-tag="&lt;section id=&quot;intro&quot;&gt;">
+      <div class="wrap">
+        <p class="eyebrow">Products</p>
+        <h1 class="hero-title" style="font-size: clamp(1.8rem, 4vw, 2.6rem);">
+          Ready-made building blocks,<br />not just services.
+        </h1>
+        <p class="section-lead">
+          Boilerplates, toolkits, and design systems we've pulled out of
+          client work and packaged so any team can start from a stronger
+          foundation.
+        </p>
+      </div>
+    </section>
+
+    <!-- PRODUCT GRID --------------------------------------------------------
+         Filter bar + cards. The filtering itself is plain vanilla JS in
+         product.js — no framework needed for "show/hide some elements
+         based on a clicked button". -->
+    <section class="section" id="products" data-tag="&lt;section id=&quot;products&quot;&gt;">
+      <div class="wrap">
+
+        <!--
+          FILTER BAR
+          - role="group" + aria-label tells assistive tech these buttons
+            act together as one control, not four unrelated buttons.
+          - aria-pressed on each button is a toggle-button pattern: true
+            means "this filter is currently active". product.js flips
+            this attribute; the CSS for [aria-pressed="true"] gives it
+            the filled blue style.
+          - data-filter holds the category each button filters to; "all"
+            is a special case product.js treats as "show everything".
+        -->
+        <div class="filter-bar" role="group" aria-label="Filter products by category">
+          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" type="button" data-filter="templates" aria-pressed="false">Templates</button>
+          <button class="filter-btn" type="button" data-filter="toolkits" aria-pressed="false">Toolkits</button>
+          <button class="filter-btn" type="button" data-filter="systems" aria-pressed="false">Systems</button>
+        </div>
+
+        <!--
+          PRODUCT CARDS
+          Each card carries data-category, which product.js reads and
+          compares against whichever filter button was clicked. Keeping
+          the category as a data attribute (rather than, say, encoding
+          it only in a CSS class) makes the relationship explicit and
+          easy to read straight from the HTML.
+        -->
+        <div class="product-grid" id="productGrid">
+
+          <article class="product-card" data-category="systems">
+            <span class="product-tag">Systems</span>
+            <h3>Blueprint Design System</h3>
+            <p>A documented component library and token set — the same
+              anatomy-labeled approach this site itself uses.</p>
+            <p class="product-price">$149 <span>one-time</span></p>
+          </article>
+
+          <article class="product-card" data-category="templates">
+            <span class="product-tag">Templates</span>
+            <h3>Signal Landing Template</h3>
+            <p>A single-page marketing template built on semantic HTML,
+              ready to restyle for a new brand in an afternoon.</p>
+            <p class="product-price">$39 <span>one-time</span></p>
+          </article>
+
+          <article class="product-card" data-category="toolkits">
+            <span class="product-tag">Toolkits</span>
+            <h3>Accessibility Audit Kit</h3>
+            <p>A checklist-driven toolkit for catching contrast, focus,
+              and semantics issues before a product ships.</p>
+            <p class="product-price">$59 <span>one-time</span></p>
+          </article>
+
+          <article class="product-card" data-category="systems">
+            <span class="product-tag">Systems</span>
+            <h3>Anatomy Starter Kit</h3>
+            <p>The exact HTML/CSS/JS scaffold behind this site — a clean
+              base for learning or shipping a small project fast.</p>
+            <p class="product-price">$49 <span>one-time</span></p>
+          </article>
+
+          <article class="product-card" data-category="toolkits">
+            <span class="product-tag">Toolkits</span>
+            <h3>Interface Toolkit</h3>
+            <p>Form fields, buttons, cards, and nav patterns as
+              copy-paste components with the CSS variables already wired.</p>
+            <p class="product-price">$89 <span>one-time</span></p>
+          </article>
+
+          <article class="product-card" data-category="templates">
+            <span class="product-tag">Templates</span>
+            <h3>Onboarding Flow Template</h3>
+            <p>A multi-step onboarding UI pattern with progress states,
+              ready to hook up to your own backend.</p>
+            <p class="product-price">$45 <span>one-time</span></p>
+          </article>
+
+        </div>
+
+        <!-- Hidden by default; product.js reveals this only if a
+             filter click matches zero cards. Right now every filter
+             has at least one product, so this stays invisible, but the
+             logic is here for when the catalog changes. -->
+        <p class="empty-state" id="emptyState" hidden>
+          No products in this category yet — check back soon.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-tag="&lt;footer&gt;">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> Northlane Studio.</p>
+      <ul class="footer-links">
+        <li><a href="/products">Products</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- script.js: shared nav-toggle + footer-year behavior (its contact-
+       form code safely skips itself on this page — see the comment in
+       script.js). product.js: this page's own filter logic. Loading
+       two module scripts is fine — each only touches the elements it
+       finds on the page it's actually running on. -->
+  <script type="module" src="script.js"></script>
+  <script type="module" src="product.js"></script>
+</body>
+</html>
