@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Makes the layout respect real device width instead of a zoomed-out
+       "desktop" view — required for any responsive site. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Northlane Studio — Product Design &amp; Development</title>
+  <meta name="description" content="Northlane Studio designs and builds digital products and the services around them." />
+
+  <!-- Google Fonts: a monospace face for headings/labels (technical,
+       "annotation" feel) and a humanist sans for body copy (readability). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Our stylesheet. Order matters: this loads before the page renders. -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================================================================
+       ACCESSIBILITY: "skip link". Hidden until a keyboard user tabs to it,
+       then lets them jump straight past the nav to the main content.
+       =================================================================== -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===================================================================
+       <header> = introductory landmark for the whole page: logo + nav.
+       There should only be one top-level <header> per page.
+       =================================================================== -->
+  <header class="site-header" data-tag="&lt;header&gt;">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Northlane Studio home">
+        Northlane<span class="logo-dot">.</span>
+      </a>
+
+      <!-- <nav> tells browsers & screen readers "this is a navigation
+           block", separate from decorative link lists in the footer. -->
+      <nav class="nav" aria-label="Primary">
+        <!-- Hamburger button: only visible on small screens (see CSS).
+             aria-expanded is flipped by script.js so assistive tech knows
+             whether the menu is open. -->
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span class="sr-only">Toggle navigation menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/" aria-current="page">Home</a></li>
+          <!--
+            These four links are PLACEHOLDERS for pages we haven't built
+            yet. They point to the real future paths so we don't have to
+            rewrite them later — only add the matching HTML files.
+          -->
+          <li><a href="/products">Products</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       <main> = the one place the page's unique content lives. Screen
+       readers can jump straight here. Only one <main> per page, ever.
+       =================================================================== -->
+  <main id="main">
+
+    <!-- HERO ------------------------------------------------------------
+         The "thesis statement" of the page: what we do, in one line,
+         plus a single primary action (scroll to the contact form). -->
+    <section class="hero" data-tag="&lt;section id=&quot;hero&quot;&gt;">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Design &amp; development studio</p>
+        <h1 class="hero-title">
+          We build the parts of a product<br />
+          people actually touch.
+        </h1>
+        <p class="hero-sub">
+          Northlane pairs product design with hands-on engineering —
+          from the first sketch to the shipped interface.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Start a project</a>
+          <a class="btn btn-ghost" href="/services">See our services</a>
+        </div>
+      </div>
+
+      <!-- Decorative annotation grid — purely visual, hidden from
+           screen readers with aria-hidden. See styles.css for the
+           blueprint-grid background this sits on top of. -->
+      <div class="hero-blueprint" aria-hidden="true">
+        <span class="tag-label">&lt;h1&gt;</span>
+        <span class="tag-label tag-label--sub">&lt;p class="hero-sub"&gt;</span>
+      </div>
+    </section>
+
+    <!-- WORK / SERVICES TEASER -------------------------------------------
+         Three cards. Later this content will likely move to /services
+         and /products — this section just previews it on the homepage. -->
+    <section class="section" id="work" data-tag="&lt;section id=&quot;work&quot;&gt;">
+      <div class="wrap">
+        <h2 class="section-title">What we do</h2>
+        <p class="section-lead">
+          Three ways we plug into a team, roughly in order of how early we
+          usually get involved.
+        </p>
+
+        <div class="card-grid">
+          <article class="card">
+            <p class="card-index">01</p>
+            <h3>Product design</h3>
+            <p>
+              Research, structure, and interface design for web products —
+              the layer people actually interact with.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="card-index">02</p>
+            <h3>Front-end engineering</h3>
+            <p>
+              Semantic, accessible, well-tested HTML/CSS/JS — the anatomy
+              this whole site is meant to demonstrate.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="card-index">03</p>
+            <h3>Ongoing services</h3>
+            <p>
+              Maintenance, iteration, and support once a product is live
+              and real users are pushing on it.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -----------------------------------------------------------
+         A real, validated contact form wired up to Web3Forms. See
+         script.js for the Zod validation + honeypot spam protection. -->
+    <section class="section section-alt" id="contact" data-tag="&lt;section id=&quot;contact&quot;&gt;">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2 class="section-title">Tell us about your project</h2>
+          <p class="section-lead">
+            Fill in the form and we'll get back to you within two business
+            days. No newsletter, no spam — just a reply from a person.
+          </p>
+        </div>
+
+        <!--
+          FORM NOTES
+          - novalidate: we turn off the browser's built-in validation UI
+            because script.js runs a stricter Zod schema and renders its
+            own error messages instead.
+          - id="contactForm": script.js looks this up to attach the
+            submit handler.
+          - data-web3forms-key: paste your Web3Forms access key here.
+            script.js reads it from this attribute at submit time, so
+            you never have to touch script.js to configure it.
+        -->
+        <form
+          class="contact-form"
+          id="contactForm"
+          data-tag="&lt;form&gt;"
+          novalidate
+          data-web3forms-key="PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE"
+        >
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
+            <p class="field-error" id="name-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+            <p class="field-error" id="email-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <p class="field-error" id="message-error" role="alert"></p>
+          </div>
+
+          <!--
+            HONEYPOT FIELD (spam protection)
+            A field a human never sees or fills in, because it's hidden
+            with CSS (see .hp-field in styles.css) — but a bot filling
+            every form field will typically fill this too. If it arrives
+            non-empty, script.js quietly discards the submission instead
+            of sending it. tabindex="-1" and autocomplete="off" keep it
+            out of keyboard tab order and password managers.
+          -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="company">Company</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <button class="btn btn-primary" type="submit" id="submitBtn">
+            Send message
+          </button>
+
+          <!-- Live region: script.js writes success/failure text here.
+               aria-live="polite" makes screen readers announce it
+               automatically without moving focus. -->
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================
+       <footer> = closing landmark: secondary links, legal, sitemap-ish
+       stuff. Same placeholder paths as the nav, so update both together.
+       =================================================================== -->
+  <footer class="site-footer" data-tag="&lt;footer&gt;">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> Northlane Studio.</p>
+      <ul class="footer-links">
+        <li><a href="/products">Products</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!--
+    type="module" gives us:
+      1) native `import` syntax (we import Zod straight from a CDN)
+      2) deferred execution by default (runs after HTML is parsed, so we
+         don't need a DOMContentLoaded wrapper, though we still use one
+         for clarity)
+      3) automatic strict mode
+  -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
