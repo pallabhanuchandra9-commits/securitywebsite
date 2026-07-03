@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  WEB ANATOMY — about.html
+  ===========================================================================
+  Fourth page of the site. Same shell pattern as the others. The one new
+  piece of JS here is the animated stat counters — a good example of two
+  browser APIs working together: IntersectionObserver (detects when an
+  element scrolls into view) and requestAnimationFrame (drives a smooth
+  number count-up). See about.js for the full walkthrough.
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About — Northlane Studio</title>
+  <meta name="description" content="Who Northlane Studio is and how we work." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-tag="&lt;header&gt;">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Northlane Studio home">
+        Northlane<span class="logo-dot">.</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span class="sr-only">Toggle navigation menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-intro" data-tag="&lt;section id=&quot;intro&quot;&gt;">
+      <div class="wrap">
+        <p class="eyebrow">About</p>
+        <h1 class="hero-title" style="font-size: clamp(1.8rem, 4vw, 2.6rem);">
+          A small studio that likes<br />reading the fine print.
+        </h1>
+        <p class="section-lead">
+          Northlane started from a simple frustration: too many handoffs
+          between "the design" and "the real thing." We do both, on
+          purpose, under one roof.
+        </p>
+      </div>
+    </section>
+
+    <!-- VALUES ------------------------------------------------------------ -->
+    <section class="section" data-tag="&lt;section id=&quot;values&quot;&gt;">
+      <div class="wrap">
+        <h2 class="section-title">How we work</h2>
+        <div class="value-grid">
+          <div class="value-card">
+            <h3>Semantics first</h3>
+            <p>The right HTML element, before any CSS or JavaScript
+              touches it. It's the cheapest accessibility and SEO work
+              you'll ever do.</p>
+          </div>
+          <div class="value-card">
+            <h3>Show the seams</h3>
+            <p>We'd rather explain a tradeoff than hide it. If a
+              deadline forces a shortcut, you'll know exactly what it
+              cost.</p>
+          </div>
+          <div class="value-card">
+            <h3>Ship in slices</h3>
+            <p>Small, reviewable pieces of real, working product beat
+              one enormous reveal at the end — for us and for you.</p>
+          </div>
+          <div class="value-card">
+            <h3>Write it down</h3>
+            <p>Decisions live in a doc, not a Slack thread that scrolls
+              away. Anyone who joins the project later can catch up
+              without asking.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS --------------------------------------------------------------
+         Each .stat-value starts at 0 and carries data-target — the real
+         number about.js should count up to once this section scrolls
+         into view. Starting at 0 in the markup means the number is
+         still correct and readable even if JavaScript fails to load. -->
+    <section class="section section-alt" data-tag="&lt;section id=&quot;stats&quot;&gt;">
+      <div class="wrap">
+        <div class="stat-grid" id="statGrid">
+          <div class="stat-card">
+            <span class="stat-value" data-target="46">0</span>
+            <p class="stat-label">Projects shipped</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" data-target="9">0</span>
+            <p class="stat-label">Years combined experience</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" data-target="14">0</span>
+            <p class="stat-label">Industries worked in</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA --------------------------------------------------------------- -->
+    <section class="section" data-tag="&lt;section id=&quot;cta&quot;&gt;">
+      <div class="wrap">
+        <div class="cta-banner">
+          <div>
+            <h2>Curious if we're a fit?</h2>
+            <p>A short intro call is usually enough to tell.</p>
+          </div>
+          <a class="btn btn-primary" href="/contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-tag="&lt;footer&gt;">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> Northlane Studio.</p>
+      <ul class="footer-links">
+        <li><a href="product.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+  <script type="module" src="about.js"></script>
+</body>
+</html>

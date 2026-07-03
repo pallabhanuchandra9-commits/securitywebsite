@@ -645,6 +645,207 @@ body {
   padding: 24px 0;
 }
 
+/* -- CTA banner (used to close out secondary pages) ---------------------- */
+.cta-banner {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.cta-banner p {
+  color: #c8cdd6;
+}
+
+.cta-banner .btn-primary {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.cta-banner .btn-primary:hover {
+  background: var(--blueprint-tint);
+}
+
+/* -- Accordion (services.html "Our process") -----------------------------
+   Built on native <details>/<summary> so it works even before/without
+   JavaScript — that's the real HTML disclosure widget, not a div faking
+   one. services.js only adds one enhancement on top: closing the other
+   panels when a new one opens ("exclusive" accordion behavior), which
+   isn't something plain HTML can do on its own. */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accordion-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  overflow: hidden;
+}
+
+/* Removes the browser's default disclosure triangle so we can draw our
+   own "+" / "–" indicator instead (see .accordion-icon below). */
+.accordion-item > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 600;
+}
+
+.accordion-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-step {
+  font-family: var(--font-display);
+  color: var(--blueprint);
+  margin-right: 12px;
+}
+
+.accordion-icon {
+  font-family: var(--font-display);
+  color: var(--blueprint);
+  flex-shrink: 0;
+}
+
+/* The [open] attribute is set by the browser itself when a <details>
+   element is expanded — no class needed, no JS needed for this part. */
+.accordion-item[open] .accordion-icon::before {
+  content: "–";
+}
+
+.accordion-icon::before {
+  content: "+";
+}
+
+.accordion-body {
+  padding: 0 22px 20px;
+  color: var(--ink-soft);
+  max-width: 65ch;
+}
+
+/* -- Stat counters (about.html) -------------------------------------------
+   Numbers start at 0 in the HTML and about.js counts them up to their
+   real value once they scroll into view — see the data-target attribute
+   on each .stat-value in about.html. */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.stat-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--blueprint);
+  display: block;
+}
+
+.stat-label {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+/* -- Values grid (about.html) ---------------------------------------------- */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+
+.value-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.value-card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* -- Contact page specifics (contact.html) ---------------------------------
+   contact.html reuses .contact-grid/.contact-form/.field/etc. from the
+   homepage contact section wholesale — this block only adds the extras
+   unique to the dedicated page: a list of direct contact details and
+   the "copy email" button next to it. */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.contact-detail dt {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--blueprint);
+  margin-bottom: 4px;
+}
+
+.contact-detail dd {
+  color: var(--ink-soft);
+}
+
+.copy-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.copy-btn {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--blueprint);
+  border: 1px solid var(--blueprint);
+  border-radius: 2px;
+  padding: 3px 9px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.copy-btn:hover {
+  background: var(--blueprint);
+  color: #fff;
+}
+
+.copy-btn[data-copied="true"] {
+  background: #1f7a4d;
+  border-color: #1f7a4d;
+  color: #fff;
+}
+
 /* -- Footer -------------------------------------------------------------- */
 .site-footer {
   border-top: 1px solid var(--line);
@@ -720,8 +921,16 @@ body {
   }
 
   .card-grid,
-  .product-grid {
+  .product-grid,
+  .stat-grid,
+  .value-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cta-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .contact-grid {

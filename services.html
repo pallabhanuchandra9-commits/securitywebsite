@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  WEB ANATOMY — services.html
+  ===========================================================================
+  Third page of the site. Same shell pattern as product.html: shared
+  header/nav/footer, shared styles.css, shared script.js (nav toggle +
+  footer year), plus a page-specific script (services.js) for the one
+  piece of behavior only this page needs.
+
+  NEW HERE: the "Our process" accordion is built on the native HTML
+  <details>/<summary> elements rather than a hand-rolled div+JS toggle.
+  That means it's expand/collapse-able even with JavaScript disabled;
+  services.js only adds one enhancement (closing other panels when a
+  new one opens) on top of behavior the browser already provides for
+  free — a good example of "progressive enhancement".
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Services — Northlane Studio</title>
+  <meta name="description" content="Product design, front-end engineering, and ongoing support from Northlane Studio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-tag="&lt;header&gt;">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Northlane Studio home">
+        Northlane<span class="logo-dot">.</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span class="sr-only">Toggle navigation menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="services.html" aria-current="page">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-intro" data-tag="&lt;section id=&quot;intro&quot;&gt;">
+      <div class="wrap">
+        <p class="eyebrow">Services</p>
+        <h1 class="hero-title" style="font-size: clamp(1.8rem, 4vw, 2.6rem);">
+          From first sketch<br />to shipped interface.
+        </h1>
+        <p class="section-lead">
+          Three ways we plug into a team, and the five-step process we
+          run underneath all of them.
+        </p>
+      </div>
+    </section>
+
+    <!-- PACKAGES ------------------------------------------------------------
+         Same three-service idea as the homepage teaser, expanded with
+         a starting price so this page can stand on its own. -->
+    <section class="section" data-tag="&lt;section id=&quot;packages&quot;&gt;">
+      <div class="wrap">
+        <div class="card-grid">
+          <article class="card">
+            <p class="card-index">01</p>
+            <h3>Product design</h3>
+            <p>
+              Research, structure, and interface design — turning a
+              rough idea into screens a team can actually build from.
+            </p>
+            <p class="product-price" style="margin-top: 16px;">From $4,500 <span>per engagement</span></p>
+          </article>
+
+          <article class="card">
+            <p class="card-index">02</p>
+            <h3>Front-end engineering</h3>
+            <p>
+              Semantic, accessible, well-tested HTML/CSS/JS — the same
+              anatomy this site itself is built to teach.
+            </p>
+            <p class="product-price" style="margin-top: 16px;">From $6,000 <span>per engagement</span></p>
+          </article>
+
+          <article class="card">
+            <p class="card-index">03</p>
+            <h3>Ongoing services</h3>
+            <p>
+              Maintenance, iteration, and support once a product is
+              live and real users are pushing on it.
+            </p>
+            <p class="product-price" style="margin-top: 16px;">From $900 <span>per month</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS ACCORDION -----------------------------------------------------
+         Five <details> elements, one per step. `name="process"` on each
+         <details> is what makes the browser treat them as a group in
+         supporting browsers (opening one auto-closes the others) —
+         services.js backs this up manually for browsers that don't yet
+         support the `name` grouping behavior. -->
+    <section class="section section-alt" data-tag="&lt;section id=&quot;process&quot;&gt;">
+      <div class="wrap">
+        <h2 class="section-title">Our process</h2>
+        <p class="section-lead">Five steps, same order, every project.</p>
+
+        <div class="accordion" id="processAccordion">
+          <details class="accordion-item" name="process" open>
+            <summary>
+              <span><span class="accordion-step">01</span>Discover</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <p class="accordion-body">
+              Stakeholder interviews, existing analytics, and a look at
+              what's already been tried. We leave this step with a
+              written problem statement, not just notes.
+            </p>
+          </details>
+
+          <details class="accordion-item" name="process">
+            <summary>
+              <span><span class="accordion-step">02</span>Design</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <p class="accordion-body">
+              Wireframes, then high-fidelity screens, reviewed together
+              on a standing weekly call so nothing drifts too far before
+              you've seen it.
+            </p>
+          </details>
+
+          <details class="accordion-item" name="process">
+            <summary>
+              <span><span class="accordion-step">03</span>Build</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <p class="accordion-body">
+              Front-end implementation against the approved designs,
+              with accessibility and performance checked continuously,
+              not bolted on at the end.
+            </p>
+          </details>
+
+          <details class="accordion-item" name="process">
+            <summary>
+              <span><span class="accordion-step">04</span>Launch</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <p class="accordion-body">
+              Staged rollout, a pre-launch checklist, and a rollback
+              plan agreed on in advance — launches shouldn't be the
+              first time anyone thinks about what could go wrong.
+            </p>
+          </details>
+
+          <details class="accordion-item" name="process">
+            <summary>
+              <span><span class="accordion-step">05</span>Support</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <p class="accordion-body">
+              A short post-launch window watching real usage, followed
+              by an optional ongoing arrangement if you'd rather not
+              hand this back to your own team right away.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA --------------------------------------------------------------- -->
+    <section class="section" data-tag="&lt;section id=&quot;cta&quot;&gt;">
+      <div class="wrap">
+        <div class="cta-banner">
+          <div>
+            <h2>Have a project in mind?</h2>
+            <p>Tell us where you're stuck and we'll tell you honestly if we're a fit.</p>
+          </div>
+          <a class="btn btn-primary" href="/contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-tag="&lt;footer&gt;">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> Northlane Studio.</p>
+      <ul class="footer-links">
+        <li><a href="product.html">Products</a></li>
+        <li><a href="services.html" aria-current="page">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+  <script type="module" src="services.js"></script>
+</body>
+</html>

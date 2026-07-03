@@ -232,7 +232,7 @@ if (form) {
     // safe to send onward.
     const accessKey = form.dataset.web3formsKey;
 
-    if (!accessKey || accessKey === "fca5ea9b-1aad-4773-a489-35936da3ca1a") {
+    if (!accessKey || accessKey === "PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE") {
       // Fails loudly in development so it's obvious the key still
       // needs to be added — see the data-web3forms-key attribute on
       // the <form> in index.html.

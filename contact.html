@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  WEB ANATOMY — contact.html
+  ===========================================================================
+  Fifth page of the site. The <form id="contactForm"> below is markup-
+  for-markup the same form from index.html's homepage contact section —
+  same field names, same honeypot, same data-web3forms-key attribute —
+  which means the existing Zod validation + Web3Forms submission code in
+  script.js works here completely unchanged. That's the payoff of having
+  put the field names and IDs in script.js rather than hardcoding this
+  page's specific layout: the same behavior file now powers two forms
+  on two different pages.
+
+  NEW HERE: a small "copy email" button (contact.js) demonstrating the
+  Clipboard API — one more real browser API, kept in its own tiny file
+  since it's specific to this page.
+
+  Remember to paste the same Web3Forms access key into this form's
+  data-web3forms-key attribute that you used on index.html.
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Contact — Northlane Studio</title>
+  <meta name="description" content="Get in touch with Northlane Studio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-tag="&lt;header&gt;">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Northlane Studio home">
+        Northlane<span class="logo-dot">.</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span class="sr-only">Toggle navigation menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-intro" data-tag="&lt;section id=&quot;intro&quot;&gt;">
+      <div class="wrap">
+        <p class="eyebrow">Contact</p>
+        <h1 class="hero-title" style="font-size: clamp(1.8rem, 4vw, 2.6rem);">
+          Tell us about your project.
+        </h1>
+        <p class="section-lead">
+          Fill in the form and we'll reply within two business days — or
+          reach us directly using the details alongside it.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact" data-tag="&lt;section id=&quot;contact&quot;&gt;">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2 class="section-title">Direct details</h2>
+          <p class="section-lead">
+            Prefer not to use the form? Here's how else to reach us.
+          </p>
+
+          <!-- <dl> = "description list": the correct semantic element
+               for label/value pairs like these, rather than a generic
+               grid of <div>s. -->
+          <dl class="contact-details">
+            <div class="contact-detail">
+              <dt>Email</dt>
+              <dd>
+                <div class="copy-row">
+                  <span id="emailText">hello@northlanestudio.example</span>
+                  <button
+                    class="copy-btn"
+                    type="button"
+                    id="copyEmailBtn"
+                    data-copy-value="hello@northlanestudio.example"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </dd>
+            </div>
+            <div class="contact-detail">
+              <dt>Response time</dt>
+              <dd>Within two business days</dd>
+            </div>
+            <div class="contact-detail">
+              <dt>Based in</dt>
+              <dd>Remote-first, working US &amp; EU hours</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!--
+          Same form markup as index.html's contact section: same field
+          names (name/email/message), same honeypot field ("company"),
+          same novalidate + data-web3forms-key pattern. script.js finds
+          this form by id="contactForm" exactly like it does on the
+          homepage — nothing about that file needed to change.
+        -->
+        <form
+          class="contact-form"
+          id="contactForm"
+          data-tag="&lt;form&gt;"
+          novalidate
+          data-web3forms-key="PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE"
+        >
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
+            <p class="field-error" id="name-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+            <p class="field-error" id="email-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <p class="field-error" id="message-error" role="alert"></p>
+          </div>
+
+          <!-- Honeypot field — see script.js section 6 and index.html
+               for the full explanation of how this is used. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="company">Company</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <button class="btn btn-primary" type="submit" id="submitBtn">
+            Send message
+          </button>
+
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-tag="&lt;footer&gt;">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> Northlane Studio.</p>
+      <ul class="footer-links">
+        <li><a href="product.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- script.js: nav toggle, footer year, AND this page's contact-form
+       validation/submission (its guard sees a real #contactForm here
+       and runs that code, unlike on product.html/services.html/
+       about.html where it's skipped). contact.js: just the copy-email
+       button, unique to this page. -->
+  <script type="module" src="script.js"></script>
+  <script type="module" src="contact.js"></script>
+</body>
+</html>
